@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
 <html>
     <head>
-        <title>Tambah Data</title>
+        <title>Edit Data</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -35,33 +34,34 @@ and open the template in the editor.
         </nav>
         <main class="py-4">
             <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-10">
-                    <div class="card">
-                        <div class="card-header">Tambah Data</div>
-                        <div class="card-body">
-                            <form action="/ktp_izal/newdata" method="POST" enctype="multipart/form-data">
-                                <div class="mb-3">
-                                    <label class="form-label">ID</label>
-                                    <input type="text" class="form-control" name="id" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Tanggal Lahir</label>
-                                    <input type="date" class="form-control" name="date" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Foto</label>
-                                    <input type="file" id="gambar" class="form-control" name="gambar" accept="image/png, image/jpeg" required>
-                                </div>
-                                <img class="mb-3 img-thumbnail col-md-2" id="thumbnail" alt="Gambar Preview"/>
-                                <br>
-                                <button type="submit" class="btn btn-success">Simpan</button>
-                                <button class="btn btn-danger" type="button" onclick="window.location.href='/ktp_izal/dummy'">Kembali</button>
-                            </form>
-                        </div>
-                    </div>                    
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="card">
+                            <div class="card-header">Edit Data</div>
+                            <div class="card-body">
+                                <form action="/ktp_izal/saveupdate" method="POST" enctype="multipart/form-data">
+                                    <input type="hidden" class="form-control" name="idupdate1" th:value="${dummy.id}">
+                                    <div class="mb-3">
+                                        <label class="form-label">ID</label>
+                                        <input type="text" class="form-control" name="idupdate" th:value="${dummy.id}" disabled>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Tanggal Lahir</label>
+                                        <input type="date" class="form-control" name="date" th:value="${#dates.format(dummy.tanggal, 'yyyy-MM-dd')}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Foto</label>
+                                        <input type="file" class="form-control" id="gambar" name="gambar" th:value="@{dummy.gambar}">
+                                    </div>
+                                    <img th:src="@{'/gambar/' + ${dummy.id}}" class="mb-3 img-thumbnail col-md-2" id="thumbnail" alt="Gambar Preview"/>
+                                    <br>
+                                    <button type="submit" class="btn btn-success">Simpan</button>
+                                    <button class="btn btn-danger" type="button" onclick="window.location.href='/ktp_izal/dummy'">Kembali</button>
+                                </form>
+                            </div>
+                        </div>                    
+                    </div>
                 </div>
-            </div>
             </div>
         </main>        
     </body>
